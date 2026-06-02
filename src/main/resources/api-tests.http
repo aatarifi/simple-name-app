@@ -1,0 +1,17 @@
+### 1. Create a New User Profile (POST Request)
+POST http://localhost:8080/api/users
+Content-Type: application/json
+
+{
+  "firstName": "Mary Jane",
+  "lastName": "O'Connor"
+}
+
+### 2. Fetch All User Profiles (GET Request)
+GET http://localhost:8080/api/users
+
+### 3. Fetch Specific User Profile By ID (Replace 1 with your actual ID)
+GET http://localhost:8080/api/users/1
+
+### 4. Delete Specific Profile By ID
+DELETE http://localhost:8080/api/users/1
