@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="app.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hello, Name App!</h1>
+    <form id="nameForm">
+        <div>
+            <label for="id-input">Profile ID:</label>
+            <input type="text" id="id-input" placeholder="Enter your ID">
+            
+            <button type="button" id="getProfile-btn">Get Profile</button>
+            <button type="button" id="deleteProfile-btn">Delete Profile</button>
+        
+
+        </div>
+        <div>
+            <label for="firstName-input">First Name:</label>
+            <input type="text" id="firstName-input" placeholder="Enter your first name">
+
+        </div>
+        <div>
+            <label for="lastName-input">Last Name:</label>
+            <input type="text" id="lastName-input" placeholder="Enter your last name">
+        </div>
+        <div>
+            <button type="button" id="submit-btn">Submit Full Name</button>
+        </div>
+        
+        <ul id="nameList-el">
+            <li>
+                <!--span>John Doe</span>
+                <button type="button" class="delete-btn">Delete</button-->
+      
+            </li>
+        </ul>
+    </form>
+    <script src="app.js"></script>
+</body>
+</html>
