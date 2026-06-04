@@ -27,6 +27,7 @@ submitButton.addEventListener('click', (event) => {
 getProfileButton.addEventListener('click', (event) => {
     event.preventDefault(); // Layer 2 protection: explicitly blocks form reload
     const userId = idInput.value.trim();
+    idInput.value = "";
     if(userId) {
         getProfile(userId);
     }
@@ -38,6 +39,7 @@ getProfileButton.addEventListener('click', (event) => {
 deleteButton.addEventListener('click', (event) => {
     event.preventDefault(); // Layer 2 protection: explicitly blocks form reload
     const userId = idInput.value.trim();
+    idInput.value = "";
     if(userId) {
         deleteName(userId);
     }
