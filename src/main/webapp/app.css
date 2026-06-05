@@ -21,7 +21,7 @@ button {
 #getProfile-btn {
     margin-top: 20px;
 }
-#nameList {
+#nameList-el {
     list-style-type: none;
     padding: 0;
     margin: 0;

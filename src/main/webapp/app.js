@@ -1,5 +1,6 @@
 const apiUrl = 'http://localhost:8080/api/users';
 
+const nameForm = document.getElementById('name-form');
 const idInput = document.getElementById('id-input');
 const firstNameInput = document.getElementById('firstName-input');
 const lastNameInput = document.getElementById('lastName-input');
@@ -8,7 +9,8 @@ const submitButton = document.getElementById('submit-btn');
 const deleteButton = document.getElementById('deleteProfile-btn');
 const getProfileButton = document.getElementById('getProfile-btn');
 
-submitButton.addEventListener('click', (event) => {
+// Listening to the 'submit' event catches both mouse clicks and keyboard 'Enter' presses!
+nameForm.addEventListener('submit', (event) => {
   // By leaving event.preventDefault() in place, you force the browser to stay on the page, 
   // allowing your asynchronous promises to safely finish saving and fetching data,
   // instead of being cut off mid-flight by the page destroy cycle during the Network call,
