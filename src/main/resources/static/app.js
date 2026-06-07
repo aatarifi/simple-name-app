@@ -1,4 +1,7 @@
-const apiUrl = 'http://localhost:8080/api/users';
+// Automatically adapts to 'http://localhost:8080/api/users' locally
+// and adapts to 'https://production-backend-app-3mkn.onrender.com/api/users' on the cloud!
+const apiUrl = '/api/users';
+
 
 const nameForm = document.getElementById('name-form');
 const idInput = document.getElementById('id-input');
