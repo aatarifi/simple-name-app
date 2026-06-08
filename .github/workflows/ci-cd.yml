@@ -1,6 +1,5 @@
 name: Java Full-Stack Cloud CI/CD Pipeline
 
-# Trigger this pipeline automatically every time a commit is pushed to the main branch
 on:
   push:
     branches: [ main ]
@@ -11,6 +10,21 @@ jobs:
     name: Compile & Run Integration Tests
     runs-on: ubuntu-latest
 
+    services:
+      postgres-db:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_USER: devuser
+          POSTGRES_PASSWORD: ${{ secrets.TEST_DB_PASSWORD }} # Completely hidden!
+          POSTGRES_DB: user_profile_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U devuser -d user_profile_db"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
       - name: Checkout Source Code
         uses: actions/checkout@v4
@@ -18,22 +32,25 @@ jobs:
       - name: Set up Java Development Kit (JDK 25)
         uses: actions/setup-java@v4
         with:
-          java-version: '25'          # Matches your project's precise compilation settings!
+          java-version: '25'
           distribution: 'temurin'
           cache: 'maven'
 
       - name: Execute Automated MockMVC Suite
-        # This compiles your app and runs all 6 of your JUnit integration tests on GitHub's cloud servers
+        env:
+          SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/user_profile_db
+          SPRING_DATASOURCE_USERNAME: devuser
+          SPRING_DATASOURCE_PASSWORD: ${{ secrets.TEST_DB_PASSWORD }} # Completely hidden!
+          SPRING_JPA_HIBERNATE_DDL_AUTO: update
         run: mvn clean test
 
   # --- STAGE 2: Continuous Deployment (Trigger Live Cloud Update) ---
   deploy-to-production:
     name: Deploy Container to Render Cloud
-    needs: build-and-test           # Strict Gate: This deployment will ONLY run if all 6 tests pass!
+    needs: build-and-test
     runs-on: ubuntu-latest
 
     steps:
       - name: Fire Secure Webhook Ping
-        # Tells Render's server infrastructure to safely pull, build the Dockerfile, and update the app
         run: |
-          curl -X POST "https://api.render.com/deploy/srv-d8ihpvu47okc739dhut0?key=j39UbGu7Lsw"
+          curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}" # Completely hidden!
