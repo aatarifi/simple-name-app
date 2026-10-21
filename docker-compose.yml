@@ -38,6 +38,17 @@ services:
     networks:
       - app-network
 
+  # --- Component 3: Your Static Frontend Web Server ---
+  frontend-app:
+    image: nginx:alpine
+    container_name: local-frontend-container
+    ports:
+      - "5500:80"
+    volumes:
+      - ./src/main/resources/static:/usr/share/nginx/html
+    networks:
+      - app-network
+
 volumes:
   postgres_storage:
 

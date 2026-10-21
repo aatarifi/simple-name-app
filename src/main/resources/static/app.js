@@ -1,6 +1,18 @@
+// relative path.
 // Automatically adapts to 'http://localhost:8080/api/users' locally
 // and adapts to 'https://production-backend-app-3mkn.onrender.com/api/users' on the cloud!
-const apiUrl = '/api/users';
+//const apiUrl = '/api/users';
+
+// Absolute path.
+// Automatically detects the environment and switches the base URL
+const backendBase = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+    ? 'http://localhost:8080'
+    : 'https://onrender.com';
+
+const apiUrl = `${backendBase}/api/users`;
+
+
+
 
 
 const nameForm = document.getElementById('name-form');
